@@ -42,6 +42,8 @@ then briefly what you checked that was fine. Skip style preferences.
 /code-review high <from>..<to> (<settled decisions>; report only defects)
 ```
 
+If `code-review` isn't available (older Claude Code), run a second fresh agent instead, with the same shape and diff and a different brief: read the diff for correctness bugs, simpler or existing ways to do the same thing, and needless cost. Its findings don't need repros.
+
 **While they run, don't edit the working tree.** The reviewer reads and runs it. Wait for both before changing code.
 
 ## 2. Triage every finding
