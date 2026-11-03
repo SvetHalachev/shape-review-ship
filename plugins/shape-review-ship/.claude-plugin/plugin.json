@@ -1,0 +1,5 @@
+{
+  "name": "shape-review-ship",
+  "description": "Four skills for taking an issue from an approved shape to a merged PR, with a two-pass review loop.",
+  "author": { "name": "Svet Halachev" }
+}

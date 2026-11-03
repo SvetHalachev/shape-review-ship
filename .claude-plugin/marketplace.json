@@ -1,0 +1,12 @@
+{
+  "name": "shape-review-ship",
+  "description": "Shape an issue, build it test-first, review it in a loop, ship it.",
+  "owner": { "name": "Svet Halachev" },
+  "plugins": [
+    {
+      "name": "shape-review-ship",
+      "source": "./plugins/shape-review-ship",
+      "description": "Four skills for taking an issue from an approved shape to a merged PR, with a two-pass review loop."
+    }
+  ]
+}
