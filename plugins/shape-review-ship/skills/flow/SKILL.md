@@ -29,7 +29,7 @@ Say in one line what you found and where you're starting.
 
 1. **`shape`**, then **stop** until the user says "shape approved" (or asks for changes, which you make and show again).
 2. **`build`** through to the draft PR.
-3. **`review`**, round after round, until a round comes back clean or with only findings rejected with reasons. Don't ask between rounds; fix, push and re-review on your own.
+3. **`review`**: both passes on round 1, then one pass sized to each fix, until a round comes back clean or with only findings rejected with reasons. Don't ask between rounds; fix, push and re-review on your own.
 4. **`ship`**: ready, CI, demo, then **stop** until the user says "approve". Then merge.
 
 While it runs, post a one-line update at each stage change ("PR #88 open, review round 1 running"), not a report each time.
@@ -38,9 +38,9 @@ While it runs, post a one-line update at each stage change ("PR #88 open, review
 
 Stop the loop and ask the user, with a recommendation, when:
 
-- **Four review rounds** have run without a clean one. Summarise what each round found, and say whether the findings are converging or opening new cases.
-- **The fixes aren't converging:** any sign in `review`'s step-back list, such as new cases in the same area two rounds running, fixes that add special cases, or work-arounds for a tool. Propose a change of approach (narrow it, replace the tool, use what exists, move it to its own issue, or accept a documented limit), not another round.
-- A fix would **change the approved shape**, beyond a detail the demo can mention.
+- **The fixes aren't converging,** checked from round 2: any sign in `review`'s step-back list, such as new cases in the same area as the round before, fixes that add special cases, inputs that can't be listed, or work-arounds for a tool. Propose a change of approach (narrow it, contain instead of enumerate, replace the tool, use what exists, move it to its own issue, or accept a documented limit), not another round.
+- **Three review rounds** have run without a clean one, even if each looks small. Summarise what each round found, and say whether the findings are converging.
+- A fix would **change the approved shape** in any way the user would notice: a new restriction, a dropped behaviour, a stricter API, a different default. Ask before building it, and never rewrite the shape as decided on your own.
 - Something needs a **force-push**, touches code another person or team owns, or would spend paid resources (a cloud review, extra CI runs).
 - CI fails for a reason that isn't in the change.
 

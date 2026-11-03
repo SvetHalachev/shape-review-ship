@@ -13,11 +13,15 @@ Nothing is built until the shape is approved. The point is to check "is this wha
 - The project's CLAUDE.md, contributing notes and existing patterns in the code the change touches.
 - Check the issue's premise against the code. If it's already done, already covered by another mechanism, or rests on something untrue, say so instead of shaping it.
 
-## 2. Split if it's big
+## 2. Try the risky choice first
+
+When the shape rests on how a tool behaves (a query plan, an index, a database's limits, a parser, a library's ordering or locking), check it with a small experiment before writing the shape: an `EXPLAIN` on realistic data, a timing, a few edge inputs through the real tool. Five minutes here is cheaper than a review round finding it after the build. Put what you measured in the shape.
+
+## 3. Split if it's big
 
 An issue with many items gets lettered PRs (A, B, C), grouped by severity or by area, each small enough to review in one sitting. Write the plan as a short "Plan" section, then shape only the first.
 
-## 3. Write the shape into the issue
+## 4. Write the shape into the issue
 
 Add a section `## Shape` (or `## Shape A`) to the issue body with:
 
@@ -28,7 +32,7 @@ Add a section `## Shape` (or `## Shape A`) to the issue body with:
 
 Keep it short. Use the project's writing rules for issues.
 
-## 4. Ask for approval
+## 5. Ask for approval
 
 - Open the issue in the user's browser (`gh issue view <n> --web`) and put the link in the message.
 - Summarise the shape in a few lines and name the decisions you'd like checked.

@@ -32,6 +32,7 @@ git add <files> && git commit -m "<type>(<scope>): <summary>"
 ```
 
 - One logical change per commit, files named explicitly. Never `git add -A`.
+- Keep anything that should only run after the commit (editing the issue or PR, pushing) chained in the same `&&` line, or in a later command after checking `git log -1`. A step on a new line runs even when the checks stopped the commit.
 - Conventional Commits: `feat`, `fix`, `perf`, `refactor`, `test`, `chore`, `ci`, `docs`. Use the type of that commit's change.
 - A failed check stops the commit. Read the failure, fix it, and run the same command again.
 
@@ -44,7 +45,7 @@ gh pr create --draft --title "<what it does>" --body "<body>"
 
 The body is a few sentences: what it does, any decision that isn't obvious, what was tested and what wasn't, and the issue it's part of.
 
-It stays a draft through review, so CI doesn't run on every round. Then run `review`.
+It stays a draft through review, so CI doesn't run on every round. Before running `review`, do its self-check (step 0): the commit happened, the shape still holds, and each new test fails when the code it covers is broken.
 
 ## Rules while building
 
