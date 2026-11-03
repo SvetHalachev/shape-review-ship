@@ -17,6 +17,38 @@ The four steps:
 
 The skills work on any project. They read its check commands and rules from its own `CLAUDE.md`.
 
+## How it runs
+
+```mermaid
+flowchart TD
+    issue([Issue]) --> shape[shape: write the shape into the issue]
+    shape --> approve1{You: shape approved?}
+    approve1 -- changes --> shape
+    approve1 -- yes --> build[build: failing test first,<br/>commits gated on the checks]
+    build --> draft[Draft PR, no CI]
+    draft --> passes
+
+    subgraph loop [review loop]
+        passes[Two passes in parallel:<br/>fresh reviewer with repros + /code-review high]
+        passes --> triage{Triage each finding}
+        triage -- proven defect --> fix[Failing test, fix, gated commit]
+        triage -- out of scope --> elsewhere[Its own issue]
+        triage -- not real --> reject[Reject with a reason]
+        fix --> converging{Converging?}
+        converging -- yes --> passes
+    end
+
+    converging -- "no: same area again, special cases,<br/>fighting a tool, 4 rounds" --> stepback{You: change approach?<br/>narrow, replace the tool,<br/>use what exists, split, accept a limit}
+    stepback --> shape
+    triage -- clean round --> ready[ship: ready, CI runs once]
+    ready --> demo[Demo, with any change from the shape]
+    demo --> approve2{You: approve?}
+    approve2 -- yes --> merge([Rebase-merge, tick the issue])
+    approve2 -- changes --> fix
+```
+
+`flow` runs all of it. Each box with "You" is where it stops and waits.
+
 ## Requirements
 
 - **Claude Code.** Both reviewers come with it: the independent reviewer is its built-in general-purpose subagent, and the second pass is its `/code-review` skill. If your version has no `/code-review`, `review` runs a second fresh reviewer instead. Nothing else to install.
