@@ -75,9 +75,29 @@ Before fixing, look for an existing mechanism that already covers the case. A se
 - A test-only commit that closes a finding doesn't need another round.
 - Tell both passes what's settled. Without that, rounds start arguing about decisions instead of finding defects.
 
-## 5. Step back when fixes keep creating edge cases
+## 5. Step back when the fixes can't converge
 
-If two rounds in a row find new cases in the same area, and each fix opens another, stop patching. The premise is usually wrong: the API is too wide, the check is in the wrong place, or the work belongs in another issue. Offer the user a change of shape (a narrower option list, moving the part to its own issue, using an existing mechanism) with a recommendation, and ask before continuing.
+Some problems can't be fixed by patching, because the approach, the tool or the scope is wrong. More rounds only move the bug. Check for these signs before every round:
+
+- **New cases in the same area two rounds in a row,** each fix opening the next.
+- **Fixes add special cases:** another `if` for one more input, option or combination, rather than a rule that covers them.
+- **A fix undoes or re-adds an earlier one,** or two findings pull in opposite directions.
+- **You're working around a tool:** a library's locking, caching, compression or timing that keeps surprising you, and each fix adds more code around it.
+- **The input space can't be listed:** every option combination, every character, every engine. The reviewers will always find one more.
+- **The tests get elaborate** just to set up the case, or a test keeps passing for the wrong reason.
+- **A check duplicates one that already exists,** or is in a place that can't see everything it needs.
+
+When you see one, **stop patching** and offer the user a change of approach, with your recommendation:
+
+| Change | When |
+|---|---|
+| **Narrow the scope or the API** | Fewer options, fewer inputs, so each one can be right. A small API that's always correct beats a wide one that's mostly correct. |
+| **Replace the tool** | The tool fights the use case. Name the replacement and what it costs. |
+| **Use an existing mechanism** | Something already handles the case; move the logic there. |
+| **Move it to its own issue** | It's a real problem, but bigger than this PR. Write down what was found. |
+| **Accept and document a limit** | The remaining cases are rare and the cost of handling them is high. Say exactly what isn't handled. |
+
+Ask before continuing. Once the user decides, update the shape in the issue and the PR body, record the decision as settled for the next round, and say in the demo what changed and why.
 
 Also stop and suggest finishing when a round only finds misuse the types already forbid, or inputs no real caller sends. Say which findings you'd leave and why.
 

@@ -37,7 +37,7 @@ While it runs, post a one-line update at each stage change ("PR #88 open, review
 Stop the loop and ask the user, with a recommendation, when:
 
 - **Four review rounds** have run without a clean one. Summarise what each round found, and say whether the findings are converging or opening new cases.
-- **The same area** produces new cases two rounds in a row (the step-back rule in `review`).
+- **The fixes aren't converging:** any sign in `review`'s step-back list, such as new cases in the same area two rounds running, fixes that add special cases, or work-arounds for a tool. Propose a change of approach (narrow it, replace the tool, use what exists, move it to its own issue, or accept a documented limit), not another round.
 - A fix would **change the approved shape**, beyond a detail the demo can mention.
 - Something needs a **force-push**, touches code another person or team owns, or would spend paid resources (a cloud review, extra CI runs).
 - CI fails for a reason that isn't in the change.
