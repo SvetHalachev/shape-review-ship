@@ -14,6 +14,8 @@ Given an issue or PR number (or the current branch), work out the stage and star
 
 | What you find | Start at |
 |---|---|
+| An existing feature or area to check, with no issue yet | `audit`, then ask which findings to fix first |
+| An audit issue with open findings | `shape`, for the next PR on its plan |
 | An issue with no `Shape` section | `shape` |
 | A shape the user hasn't approved in this conversation or on the issue | ask for approval, as `shape` does |
 | An approved shape, no branch or PR | `build` |

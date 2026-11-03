@@ -5,6 +5,7 @@ Claude Code skills that take an issue from an agreed shape to a merged PR. Run t
 | Skill | Does | Waits for |
 |---|---|---|
 | `flow` | Runs the four below in order, picking up wherever the work is. Loops the reviews until a round is clean, and stops to ask after four rounds or when fixes keep opening new cases | your two approvals |
+| `audit` | Reviews code that already exists with the same two passes, and writes the proven findings into an issue by severity, ready to fix through the flow | you to pick what to fix first |
 
 The four steps:
 
@@ -21,6 +22,8 @@ The skills work on any project. They read its check commands and rules from its 
 
 ```mermaid
 flowchart TD
+    existing([Existing feature]) --> audit[audit: both passes on the code,<br/>findings into an issue by severity]
+    audit --> issue
     issue([Issue]) --> shape[shape: write the shape into the issue]
     shape --> approve1{You: shape approved?}
     approve1 -- changes --> shape
@@ -77,6 +80,7 @@ Ask in plain words ("shape issue 59", "run the review loop on PR 88"), or call a
 
 ```
 /shape-review-ship:flow 59      # the whole thing, from wherever issue 59 is
+/shape-review-ship:audit packages/core/src/fields   # review first, for code that exists
 /shape-review-ship:shape 59
 /shape-review-ship:build
 /shape-review-ship:review 88
