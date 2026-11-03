@@ -42,6 +42,8 @@ then briefly what you checked that was fine. Skip style preferences.
 /code-review high <from>..<to> (<settled decisions>; report only defects)
 ```
 
+Always `high`, which runs locally. Never `ultra`: that runs a billed, multi-agent review in the cloud, and only the user starts it. Don't pass `--comment` either: findings come back to this session, not as PR comments.
+
 If `code-review` isn't available (older Claude Code), run a second fresh agent instead, with the same shape and diff and a different brief: read the diff for correctness bugs, simpler or existing ways to do the same thing, and needless cost. Its findings don't need repros.
 
 **While they run, don't edit the working tree.** The reviewer reads and runs it. Wait for both before changing code.
