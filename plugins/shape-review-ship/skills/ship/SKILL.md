@@ -16,6 +16,8 @@ gh pr checks <n> --watch
 
 CI runs once. If it fails, fix with a failing test first and push. A logic fix goes back through `review` for the new commits.
 
+Push first, and mark it ready only once that push's run has shown up (`gh run list --branch <branch> --limit 1`). A push and "ready" a second apart start two runs: the push's run sees a draft and skips, and it can cancel the ready one, so CI never really runs. If the checks show only skipped or cancelled jobs, re-run the cancelled run (`gh run rerun <id>`), which carries the ready event.
+
 ## 2. Demo
 
 Tell the user, briefly:
