@@ -1,6 +1,12 @@
 # shape-review-ship
 
-Four Claude Code skills that take an issue from an agreed shape to a merged PR:
+Claude Code skills that take an issue from an agreed shape to a merged PR. Run the whole thing with `flow`, or each step on its own:
+
+| Skill | Does | Waits for |
+|---|---|---|
+| `flow` | Runs the four below in order, picking up wherever the work is. Loops the reviews until a round is clean, and stops to ask after four rounds or when fixes keep opening new cases | your two approvals |
+
+The four steps:
 
 | Skill | Does | Waits for |
 |---|---|---|
@@ -38,6 +44,7 @@ claude plugin install shape-review-ship@shape-review-ship
 Ask in plain words ("shape issue 59", "run the review loop on PR 88"), or call a skill directly:
 
 ```
+/shape-review-ship:flow 59      # the whole thing, from wherever issue 59 is
 /shape-review-ship:shape 59
 /shape-review-ship:build
 /shape-review-ship:review 88
