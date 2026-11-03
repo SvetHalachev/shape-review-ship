@@ -11,6 +11,12 @@ Four Claude Code skills that take an issue from an agreed shape to a merged PR:
 
 The skills work on any project. They read its check commands and rules from its own `CLAUDE.md`.
 
+## Requirements
+
+- **Claude Code.** Both reviewers come with it: the independent reviewer is its built-in general-purpose subagent, and the second pass is its `/code-review` skill. If your version has no `/code-review`, `review` runs a second fresh reviewer instead. Nothing else to install.
+- **The GitHub CLI (`gh`), signed in** (`gh auth login`). The skills use it to read and edit issues, and to open, ready and merge PRs.
+- **A `CLAUDE.md` in your project** that says how to run its checks.
+
 ## Install
 
 In Claude Code:
