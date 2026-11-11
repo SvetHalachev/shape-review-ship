@@ -39,7 +39,7 @@ While it runs, post a one-line update at each stage change ("PR #88 open, review
 Stop the loop and ask the user, with a recommendation, when:
 
 - **The fixes aren't converging,** checked from round 2: any sign in `review`'s step-back list, such as new cases in the same area as the round before, fixes that add special cases, inputs that can't be listed, or work-arounds for a tool. Propose a change of approach (narrow it, contain instead of enumerate, replace the tool, use what exists, move it to its own issue, or accept a documented limit), not another round.
-- **Three review rounds** have run without a clean one, even if each looks small. Summarise what each round found, and say whether the findings are converging.
+- **Three review rounds** have run without a clean one, even if each looks small. Summarise what each round found, and say whether the findings are converging. Small fixes after round 3 ship without another round; anything structural is the user's decision.
 - A fix would **change the approved shape** in any way the user would notice: a new restriction, a dropped behaviour, a stricter API, a different default. Ask before building it, and never rewrite the shape as decided on your own.
 - Something needs a **force-push**, touches code another person or team owns, or would spend paid resources (a cloud review, extra CI runs).
 - CI fails for a reason that isn't in the change.

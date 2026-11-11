@@ -27,6 +27,7 @@ Add a section `## Shape` (or `## Shape A`) to the issue body with:
 
 - **What changes, as the person using it sees it.** Real example code or commands, real messages, before and after. No internal design unless it's the point.
 - **Decisions the reader should check.** A default value, a limit, a name, a behaviour change. Make each one visible so it can be challenged.
+- **Who it guards against,** for a change that touches security: who could misuse it, what they can already do (a database admin, another site on the same server, a signed-in user), and what's out of scope. Reviews then check a stated model instead of discovering one, a round at a time.
 - **Out of scope.** What this deliberately doesn't do, and where that lives instead.
 - **Tests.** The cases that will prove it, including the failure cases.
 

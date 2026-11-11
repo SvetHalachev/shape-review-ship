@@ -76,6 +76,7 @@ The two passes find different things: the reviewer finds what only running shows
 | Real problem outside the shape | Add it to the issue it belongs to, with what was found. Don't widen the PR. |
 | Bug in code another person or team owns | Open an issue with their label, the repro and the API to use. Don't fix their code. |
 | Low value, a cleanup, or rests on a premise that doesn't hold | Reject with a one-line reason the user can check ("nothing has launched, so no stored data predates this"). |
+| One case of a pattern (the same kind of gap as an earlier finding, or one you can see more of) | Write the rule that covers the pattern, then fix with it. A fix for one instance tends to open the next finding. |
 | Design question inside the approved shape | Decide it, record it as settled, and say so in the next round's prompt. Only defects count after that. |
 | A fix that would change the approved shape | Stop and ask the user, with a recommendation, before building it. |
 
@@ -96,8 +97,12 @@ After round 1, review only the new commits (`git diff <last reviewed>..HEAD`), a
 | The new commits | Review |
 |---|---|
 | Only tests, comments, names, or a revert to the base's behaviour | None. Say why in the summary. |
-| A fix confined to what round 1 already reviewed | `/code-review high <from>..<to> (<settled decisions>; report only defects) --max-findings 5` |
-| A fix that changes behaviour in a risky area (SQL, migrations, concurrency, money, security, stored data), or a new approach | Both passes, scoped to the new commits. The reviewer may run on a smaller model (`model: "sonnet"`) when it only checks round 1's fixes. |
+| A fix to what an earlier round reviewed | The independent reviewer alone, scoped to the new commits, with repros. It may run on a smaller model (`model: "sonnet"`) when it only checks earlier fixes. |
+| A fix that restructures code, or a new approach | The independent reviewer, and `/code-review high <from>..<to> (<settled decisions>; report only defects) --max-findings 5`. |
+
+After round 1 the two passes mostly find the same defects, and `/code-review`'s extra findings are cleanups; the reviewer's repros are the better use of a round.
+
+At most two rounds after round 1. After round 3, small fixes ship without another round; anything structural goes to the user as a decision.
 
 Tell every pass what's settled. Without that, rounds argue about decisions instead of finding defects.
 
