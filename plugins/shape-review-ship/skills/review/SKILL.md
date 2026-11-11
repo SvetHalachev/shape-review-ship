@@ -1,6 +1,6 @@
 ---
 name: review
-description: Review a draft PR in a loop until it's clean - two independent passes in the first round (a fresh reviewer that proves defects with repros, and /code-review), then one pass sized to each fix, triage, fixes with failing tests first, and an early step back when fixes don't converge. Use after `build` opens a draft PR, or when asked to review, re-review or "run the review loop" on a PR.
+description: Review a draft PR in a loop until it's clean - two independent passes in the first round (a fresh reviewer that proves defects with repros, and /code-review), then the reviewer alone for at most two more rounds (with /code-review only when a fix restructures code), triage, fixes with failing tests first, and an early step back when fixes don't converge. Use after `build` opens a draft PR, or when asked to review, re-review or "run the review loop" on a PR.
 ---
 
 # Review loop
